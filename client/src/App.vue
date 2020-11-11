@@ -1,41 +1,38 @@
 <template>
     <div id="app">
-        <Nav />
+        <Nav v-if="freeRoute"/>
 
-        <div class="">
-            <transition name="fade">
+        <div class="wrapper">
+            <!-- <transition name="fade"> -->
                 <router-view></router-view>
-            </transition>
-            <div class="footer">
-                footer
-            </div>
+            <!-- </transition> -->            
         </div>
 
-        <!-- no-header-close -->
+        <Footer v-if="freeRoute"/>
+
         <b-sidebar id="cart-sidebar"
                    title="Cart"
-                   bg-variant="dark"
-                   text-variant="light"
                    backdrop
                    shadow
-                   :width="'600px'"
+                   :width="'500px'"
                    right>
-            <div class="px-5 py-5">
-                <ListCart :toSidebar="true" />
-            </div>
+            <ListCart :toSidebar="true" />
         </b-sidebar>
 
         <!-- Modals -->
         <AddCategoryModal />
         <AddProductModal />
         <ViewProductModal />
+        <CheckoutModal />
+        <AuthModal />
     </div>
 </template>
 
 <script lang="ts">
     import { Component, Vue } from 'vue-property-decorator';
-    import Nav from '@/components/Nav.vue'
-    import ListCart from '@/components/list-cart.vue'
+    import Nav from '@/components/Nav.vue';
+    import Footer from '@/components/Footer.vue';
+    import ListCart from '@/components/list-cart.vue';
     // import AddCategoryModal from '@/components/modals/add-category.vue'
     // import AddProductModal from '@/components/modals/add-product.vue'
     // import ViewProductModal from '@/components/modals/view-product.vue'
@@ -46,21 +43,25 @@
     @Component({
         components: {
             Nav,
+            Footer,
             ListCart,
             // AddCategoryModal,
             // AddProductModal,
             // ViewProductModal,
 
             AddCategoryModal: () => import(/* webpackChunkName: "add-category-modal" */ '@/components/modals/add-category.vue'),
-            AddProductModal: () => import(/* webpackChunkName: "cart" */ '@/components/modals/add-product.vue'),
-            ViewProductModal: () => import(/* webpackChunkName: "cart" */ '@/components/modals/view-product.vue')
+            AddProductModal: () => import(/* webpackChunkName: "add-product" */ '@/components/modals/add-product.vue'),
+            ViewProductModal: () => import(/* webpackChunkName: "view-product" */ '@/components/modals/view-product.vue'),
+            CheckoutModal: () => import(/* webpackChunkName: "checkout-modal" */ '@/components/modals/checkout.vue'),
+            AuthModal: () => import(/* webpackChunkName: "auth-modal" */ '@/components/modals/auth-modal.vue')
         },
     })
     export default class App extends Vue {
 
-        created() {
-            // AuthModule.checkIfLogged()
+        get freeRoute() {
+            return MainModule.freeRoute
         }
+
     }
 </script>
 
@@ -70,23 +71,17 @@
     font-family: "Montserrat", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
     color: #2c3e50;
-    .magnifico {
-        margin: 50px auto;
-        text-align: center;
-        padding: 0;
-        max-width: 1300px;
-    }
-    .footer {
-        margin-top: 100px;
+    // height: 100%;
+    .wrapper {
+        height: 100vh;
     }
 }
 
 @media only screen and (max-width: 600px) {
     #app {
-        .magnifico {
-            width: 90%;
+        .wrapper {
+            margin: 60px 0;
         }
     }
 }

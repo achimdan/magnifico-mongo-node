@@ -30,7 +30,8 @@ import {
 	CarouselPlugin,
 	FormRadioPlugin,
 	SidebarPlugin,
-	SpinnerPlugin
+	SpinnerPlugin,
+	ListGroupPlugin 
 } from 'bootstrap-vue'
 
 import VueSlickCarousel from 'vue-slick-carousel'
@@ -62,6 +63,7 @@ Vue.use(CarouselPlugin)
 Vue.use(FormRadioPlugin)
 Vue.use(SidebarPlugin)
 Vue.use(SpinnerPlugin)
+Vue.use(ListGroupPlugin)
 
 Vue.config.productionTip = false
 

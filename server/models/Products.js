@@ -13,9 +13,29 @@ const ProductsSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    Category: {
-        type: Object,
-        required: true
+    // Category: {
+    //     type: Object,
+    //     required: false
+    // },
+    // Home: {
+    //     type: Boolean,
+    //     require: false
+    // },
+    // Colors: {
+    //     type: Array,
+    //     require: false
+    // },
+    // Stock: {
+    //     type: Boolean,
+    //     require: false
+    // },
+    // Available: {
+    //     type: String,
+    //     require: false
+    // }
+    ProductImage: {
+        type: Array,
+        require: true
     }
 });
 

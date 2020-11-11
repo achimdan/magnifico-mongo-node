@@ -55,7 +55,7 @@
                             </button>
                         </div>
                     </div>
-<!--
+
                     <div class="flex mt-3">
                         <b-form-checkbox id="in-stock"
                                          v-model="product.Stock"
@@ -73,10 +73,10 @@
                                            v-model="product.Available"
                                            class="mb-2">
                         </b-form-datepicker>
-                    </div> -->
+                    </div>
                 </div>
 
-                <!-- <div>
+                <div>
                     <div class="added-images">
                         <div class="images"
                              v-for="img in product.Images"
@@ -106,7 +106,7 @@
                         </div>
                     </div>
                     <Uploads @filesToUpload="filesToUpload" />
-                </div> -->
+                </div>
             </div>
 
             <div class="flex mt-4 float-right">
@@ -170,7 +170,6 @@
             // console.log(this.modalType)
             // console.log(this.selectedProduct)
             this.product = { ...this.selectedProduct }
-            console.log(this.product)
         }
 
         selectColor(btn) {
@@ -183,7 +182,8 @@
 
         save(evt: any) {
             evt.preventDefault()
-            // if (!this.product.Stock) (this.product.Available = null, this.product.Stock = false)
+            this.product.Colors = this.colors
+            this.product.ProductImage = this.images
             this.modalType === 'ADD'
                 ? MainModule.saveProduct(this.product)
                 : MainModule.editProduct(this.product)

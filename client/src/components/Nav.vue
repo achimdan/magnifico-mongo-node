@@ -80,7 +80,7 @@
     import { Component, Vue, Prop } from "vue-property-decorator";
     import { MainModule } from '../store/main-module';
     import { AuthModule } from '../store/auth-module';
-    import { CartModule } from '@/store/cart-module';
+    import { CartModule } from '../store/cart-module';
 
     import MenuIcon from './menu-icon.vue'
 

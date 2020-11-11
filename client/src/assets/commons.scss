@@ -4,6 +4,13 @@
 
 $primary-color: #fc615d;
 
+html {
+    height: 100vh;
+    body {
+        height: 100vh;
+    }
+}
+
 .fade-enter-active, .fade-leave-active {
     transition: opacity .5s;
 }
@@ -85,6 +92,7 @@ $primary-color: #fc615d;
     font-weight: 600;
     outline: none;
     display: block;
+    border-radius: 0;
 }
 
 .primary-button-sm {
@@ -143,6 +151,36 @@ $primary-color: #fc615d;
     right: 50px;
 }
 
+.carousel {
+    .slick-prev, .slick-next {
+        background: transparent;
+        &::before {
+            content: '';
+            border: solid #fc615d;
+            border-width: 0 3px 3px 0;
+            display: inline-block;
+            padding: 3px;
+            font-family: none;
+            color: #fc615d;
+            height: 25px;
+            width: 25px;
+            position: relative;
+            top: -1px;
+        }
+    }
+    .slick-next::before {
+        transform: rotate(-45deg);
+        -webkit-transform: rotate(-45deg);
+        right: 3px;
+    }
+      
+    .slick-prev::before {
+        transform: rotate(135deg);
+        -webkit-transform: rotate(135deg);
+        left: 3px;
+    }
+}
+
 // VALUE SELECTOR
 .selector {
     width: 100% !important;
@@ -157,11 +195,70 @@ $primary-color: #fc615d;
     border: none;
 }
 
+
+// POPOVER
+.pop-inner {
+    width: 150px;
+}
+
+
+/////// ADMIN ////////
+
+//to change
+.table th, .table td {
+    border-top: none;
+    vertical-align: middle;
+}
+
+
+.admin-card {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.icon-button {
+    padding: 5px 20px;
+    color: black;
+    .icon {
+        margin-left: 5px;
+    }
+}
+
+.carousel {
+    .carousel-inner {
+        border-radius: 10px;                
+    }
+}
+
+.admin-table {
+    .actions {
+        display: flex;
+        justify-content: space-between;    
+    }
+}
+
 @media only screen and (max-width: 600px) {
+    // SLICK SLIDER 
+    .slick-prev, .slick-next {
+        display: none !important;
+    }
+
+
+    .main-container {
+        margin: 40px auto 0;
+    }
+
     #view-product-modal {
         padding-left: 0 !important;
         .view-product-modal {
             width: initial;
         }
+    }
+}
+
+@media (max-width:1350px) and (min-width:600px) {
+    .main-container {
+        width: 93%;
     }
 }

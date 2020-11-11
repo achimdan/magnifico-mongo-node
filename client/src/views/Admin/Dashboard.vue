@@ -1,42 +1,16 @@
 <template>
     <div class="dashboard">
-        <h5 class="title">
-            My Dashboard
-        </h5>
-        <div class="cards">
-            <b-card bg-variant="dark"
-                    text-variant="white"
-                    title="Add category">
-                <b-card-text>
-                    With supporting text below as a natural lead-in to additional content.
-                </b-card-text>
-                <b-button v-b-modal.add-category-modal
-                          pill
-                          variant="primary">
-                    Add category
-                </b-button>
-            </b-card>
+        <h2>Dasboard</h2>
+        
+        <div class="products">           
 
-            <b-card bg-variant="dark"
-                    text-variant="white"
-                    title="Add product">
-                <b-card-text>
-                    With supporting text below as a natural lead-in to additional content.
-                </b-card-text>
-                <b-button @click="addProduct"
-                          pill
-                          variant="primary">
-                    Add product
-                </b-button>
-            </b-card>
-        </div>
-        <div class="products">
             <b-table :table-class="'shop-table'"
                      striped
                      hover
                      :fields="fields"
                      :items="products">
                 <template v-slot:cell(Images)="data">
+                    <!-- <img :src="'http://localhost:3000/uploads/' + data.item.ProductImage[0]" alt=""> -->
                     <b-carousel id="carousel-1"
                                 controls
                                 :interval="80000000000000"
@@ -44,9 +18,9 @@
                                 img-width="100"
                                 img-height="100"
                                 style="text-shadow: 1px 1px 2px #333">
-                        <b-carousel-slide v-for="image in data.item.Images"
+                        <b-carousel-slide v-for="image in data.item.ProductImage"
                                           :key="image.Id"
-                                          :img-src="baseUrl + `api/files/${image.Name}`">
+                                          :img-src="`http://localhost:3000/uploads//${image}`">
                         </b-carousel-slide>
 
                     </b-carousel>
@@ -94,7 +68,7 @@
         }
 
         get baseUrl() {
-            return MainModule.BASE_URL
+            return MainModule.BASE_URL_MONGO
         }
 
         fields = [
@@ -133,20 +107,12 @@
 </script>
 
 <style lang="scss" scoped>
-.dashboard {
-    .title {
-        margin: 0 0 20px;
-        text-align: left;
-    }
-    .cards {
-        display: grid;
-        grid-template-columns: auto auto;
-        grid-gap: 20px;
-    }
-    .products {
-        margin-top: 50px;
-        .image {
-            width: 100px;
+.products {
+    .setup {
+        text-align: right;
+        margin-bottom: 20px;
+        .main-button {
+            margin-left: 10px;
         }
     }
 }

@@ -14,6 +14,7 @@ const BASE_URL_MONGO: string = 'api/'
 class Main extends VuexModule {
 
     BASE_URL: string = 'https://marius-cornea.website/shop/'
+    BASE_URL_MONGO: string = 'api/'
 
     categories: any = []
     products: Array<Object> = []
@@ -22,13 +23,16 @@ class Main extends VuexModule {
     modalType: string = ''
     selectedProduct: any = {}
     favorites: any = []
+    freeRoute: boolean = true
 
-    @Action
-    async fetchCategories() {
-        const response = await axios.get(`${BASE_URL_MONGO}categories`)
-        const data = response.data
-        this.categories = data
-    }
+    fields: Array<{}> = [
+        { key: 'Images', class: 'image' },
+        { key: 'Name', sortable: false },
+        { key: 'Description' },
+        { key: 'Price' },
+        { key: 'Stock' },
+        { key: 'Actions' }
+    ]
 
     @Mutation
     setModalType(payload: string) {
@@ -41,20 +45,54 @@ class Main extends VuexModule {
         this.selectedProduct = payload
     }
 
+    @Mutation
+    setRouteType(payload: any) {
+        this.freeRoute = payload
+    }
+
+    @Action
+    async fetchCategories() {
+        const response = await axios.get(`${this.BASE_URL_MONGO}categories`)
+        const data = response.data
+        this.categories = data
+    }
+
+
     @Action
     async saveCategory(payload: any) {
         await axios
             // .post(`${this.BASE_URL}api/v1/admin/categories`, payload)
-            .post(`${BASE_URL_MONGO}categories`, payload)
+            .post(`${this.BASE_URL_MONGO}categories`, payload)
     }
 
+    //PRODUCTS
+
+    //Fetch products
+    @Action
+    async fetchProducts() {
+        const response = await axios.get(`${this.BASE_URL_MONGO}products`)
+        const data = response.data
+        response.data ? this.products = data : null
+    }
+
+    // Save products
     @Action
     async saveProduct(payload: any) {
+        let formData = new FormData()
+        formData.append('Name', payload.Name);
+        formData.append('Price', payload.Price);
+        formData.append('Description', payload.Description);
+
+        payload.ProductImage
+            .forEach((file: any, index: any) => {
+                formData.append('ProductImage', file[index])
+                console.log('ProductImage['+ index + ']', file)
+            })
+        // formData.append('ProductImage', payload.ProductImage);
         await axios
-            .post(`${BASE_URL_MONGO}products`, payload)
-            // .then((response: any) => {
-            //     this.uploadImages(response.data.Id, payload.images)
-            // })
+            .post(`${this.BASE_URL_MONGO}products`, formData)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
     }
 
     @Action
@@ -63,7 +101,7 @@ class Main extends VuexModule {
         const { _id } = payload
         delete payload._id
         await axios
-            .patch(`${BASE_URL_MONGO}products/${_id}`, payload)
+            .patch(`${this.BASE_URL_MONGO}products/${_id}`, payload)
             .then((response: any) => {
                 const index = this.products.findIndex((el: any) => el._id === response.data.Id)
                 this.products[index] = response.data
@@ -124,7 +162,7 @@ class Main extends VuexModule {
     @Action
     async deleteProduct(payload: any) {
         await axios
-            .delete(`${BASE_URL_MONGO}products/${payload.item._id}`)
+            .delete(`${this.BASE_URL_MONGO}products/${payload.item._id}`)
             .then(() => this.products.splice(payload.index, 1))
     }
 
@@ -133,14 +171,7 @@ class Main extends VuexModule {
     //     const response = await axios.get(`${this.BASE_URL}api/v1/categories`)
     //     const data = response.data
     //     this.categories = data
-    // }
-
-    @Action
-    async fetchProducts() {
-        const response = await axios.get(`${BASE_URL_MONGO}products`)
-        const data = response.data
-        response.data ? this.products = data : null
-    }
+    // }    
 
     @Action
     signOut() {
