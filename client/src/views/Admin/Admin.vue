@@ -1,8 +1,8 @@
 <template>
     <div class="admin">
-        <Header />         
-        <div class="admin-container">            
-            <LeftNav/>
+        <!-- <Header />  -->
+        <div class="admin-container">
+            <LeftNav />
             <div class="admin-content">
 
                 <div class="content">
@@ -32,9 +32,9 @@
     .admin-container {
         height: 100%;
         display: grid;
-        grid-template-columns: 300px auto;
+        grid-template-columns: 270px auto;
         .admin-content {
-            background: #f2f4f5;
+            background: #eeeeee;
             .content {
                 padding: 30px;
                 .products {
@@ -48,7 +48,6 @@
                 }
             }
         }
-        
     }
 }
 </style>

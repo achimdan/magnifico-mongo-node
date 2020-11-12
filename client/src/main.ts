@@ -31,7 +31,7 @@ import {
 	FormRadioPlugin,
 	SidebarPlugin,
 	SpinnerPlugin,
-	ListGroupPlugin 
+	ListGroupPlugin
 } from 'bootstrap-vue'
 
 import VueSlickCarousel from 'vue-slick-carousel'

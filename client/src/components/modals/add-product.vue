@@ -28,7 +28,7 @@
                            :required="true"
                            :value="product.Description"
                            v-model="product.Description" />
-                     <Dropdown :options="categories"
+                    <Dropdown :options="categories"
                               :name="'Categories'"
                               :label="true"
                               v-model="product.Category" />
@@ -79,7 +79,7 @@
                 <div>
                     <div class="added-images">
                         <div class="images"
-                             v-for="img in product.Images"
+                             v-for="img in selectedProduct.ProductImage"
                              :key="img.Id"
                              @mouseenter="deleteButton = img.Id"
                              @mouseleave="deleteButton = 0">
@@ -99,7 +99,7 @@
                                      id="popover-1-user"
                                      class="user">
                             </button>
-                            <img :src="baseUrl + `api/files/${img.Name}`"
+                            <img :src="`http://localhost:3000/uploads//${img}`"
                                  alt=""
                                  width="100"
                                  height="100">
@@ -143,7 +143,7 @@
         }
 
         get baseUrl() {
-            return MainModule.BASE_URL
+            return MainModule.BASE_URL_MONGO
         }
 
         get categories() {
@@ -204,6 +204,7 @@
             // MainModule.resetModalFata()
             MainModule.setModalType('')
             MainModule.setSelectedProduct({})
+            this.$router.replace({ 'query': {} });
         }
     }
 </script>
