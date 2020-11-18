@@ -85,8 +85,8 @@ class Main extends VuexModule {
 
         payload.ProductImage
             .forEach((file: any, index: any) => {
-                formData.append('ProductImage', file[index])
-                console.log('ProductImage['+ index + ']', file)
+                formData.append('ProductImage[]', file)
+                console.log('ProductImage[' + index + ']', file)
             })
         // formData.append('ProductImage', payload.ProductImage);
         await axios

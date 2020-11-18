@@ -36,7 +36,7 @@
         .admin-content {
             background: #eeeeee;
             .content {
-                padding: 30px;
+                padding: 50px;
                 .products {
                     .setup {
                         text-align: right;

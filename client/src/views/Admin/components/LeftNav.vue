@@ -15,7 +15,7 @@
             </div>
             <router-link class="link"
                          to="/">
-                <font-awesome-icon :icon="['fas', 'eye']"
+                <font-awesome-icon :icon="['fas', 'home']"
                                    class="icon" />
                 <span class="text">
                     Home
@@ -23,7 +23,7 @@
             </router-link>
             <router-link class="link"
                          to="/dashboard">
-                <font-awesome-icon :icon="['fas', 'trash-alt']"
+                <font-awesome-icon :icon="['fas', 'border-all']"
                                    class="icon" />
                 <span class="text">
                     Dashboard
@@ -31,7 +31,7 @@
             </router-link>
             <router-link class="link"
                          to="/catalog">
-                <font-awesome-icon :icon="['fas', 'pen']"
+                <font-awesome-icon :icon="['fas', 'id-badge']"
                                    class="icon alt" />
                 <span class="text">
                     Catalog

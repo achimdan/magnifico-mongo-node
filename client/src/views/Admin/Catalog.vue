@@ -11,10 +11,13 @@
                                  :unchecked-value="false">
                 </b-form-checkbox>
                 <div class="filter-products">
-                    <b-form-input v-model="searchProduct"
-                                  placeholder="Search for product"
-                                  class="search-input">
-                    </b-form-input>
+                    <b-form-group :id="`input-group_catalog`"
+                                  class="nms-form-group">
+                        <b-form-input v-model="searchProduct"
+                                      placeholder="Search for product"
+                                      class="search-input">
+                        </b-form-input>
+                    </b-form-group>
                     <div>
                         Filter by:
                     </div>

@@ -1,11 +1,12 @@
 <template>
     <b-form-group :id="`input-group_${keyName.replace(/\s/g, '')}`"
-                  class="api-form-group "
+                  class="nms-form-group"
                   :label="keyName"
                   :label-for="keyName.replace(/\s/g, '')">
         <b-form-input :id="keyName.replace(/\s/g, '')"
                       v-model="inputValue"
                       :type="type"
+                      class="nms-input"
                       :disabled="disabled"
                       :required="required"
                       :placeholder="`Enter ${placeholder}`">

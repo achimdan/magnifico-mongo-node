@@ -244,18 +244,6 @@ html {
     }
 }
 
-.search-input {
-    border-radius: 10px;
-    background: #eeeeee;
-    border: none;
-    font-size: 14px;
-
-    &:focus {
-        box-shadow: none;
-        background: #eeeeee;
-    }
-}
-
 //to change
 .table th,
 .table td {
@@ -359,5 +347,41 @@ html {
 @media (max-width:1350px) and (min-width:600px) {
     .main-container {
         width: 93%;
+    }
+}
+
+
+
+.nms-form-group {
+    label.d-block {
+        font-size: 14px;
+        font-weight: 500;
+        color: #717171;
+    }
+
+    .search-input {
+        border-radius: 10px;
+        background: #eeeeee;
+        border: none;
+        font-size: 14px;
+        text-transform: capitalize;
+
+        &:focus {
+            box-shadow: none;
+            background: #eeeeee;
+        }
+    }
+
+    .nms-input {
+        border-radius: 10px;
+        background: #eeeeee;
+        border: none;
+        font-size: 14px;
+        text-transform: capitalize;
+
+        &:focus {
+            box-shadow: none;
+            background: #eeeeee;
+        }
     }
 }

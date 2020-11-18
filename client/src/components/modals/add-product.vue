@@ -216,17 +216,17 @@
     button {
         outline: none;
         border: none;
-        height: 40px;
-        width: 45px;
-        border-radius: 5px;
+        height: 20px;
+        width: 20px;
+        border-radius: 50px;
     }
     .color-selected {
         position: relative;
         &::before {
             position: absolute;
-            content: url("../../../src/assets/img/check.svg");
-            width: 25px;
-            height: 25px;
+            // content: url("../../../src/assets/img/check.svg");
+            // width: 25px;
+            // height: 25px;
             top: 0;
             bottom: 0;
             right: 0;
