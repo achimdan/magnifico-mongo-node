@@ -1,6 +1,6 @@
 <template>
     <div class="main-container view-product">
-        <div class="slider"
+        <!-- <div class="slider"
              v-if="product">
             <VueSlickCarousel :arrows="true"
                               :dots="false">
@@ -21,8 +21,7 @@
                 {{product.Price}} RON
             </p>
             <span class="description">
-                <!-- {{product.Description}} -->
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe dolorem, totam, amet, culpa at odio sunt illo tempora accusantium nostrum quis voluptate dicta repellendus! Laborum rerum architecto vitae? Saepe, voluptatem?
+                {{product.Description}}
             </span>
 
             <section class="flex space-between value-select">
@@ -90,15 +89,15 @@
                     </button>
                 </div>
             </section>
-        </div>
+        </div> -->
     </div>
 </template>
 
 <script lang="ts">
     import { Vue, Component, Prop, Watch } from "vue-property-decorator";
-    import { MainModule } from "@/store/main-module";
-    import Input from '@/components/Input.vue'
-    import { CartModule } from '@/store/cart-module';
+    import { MainModule } from "../store/main-module";
+    import Input from '../components/Input.vue'
+    import { CartModule } from '../store/cart-module';
 
     @Component
     export default class ProductComponent extends Vue {
@@ -108,12 +107,14 @@
         }
 
         get product() {
-            return MainModule.products.find((el: any) => {
-                if (el.Id === Number(this.$route.params.id)) {
-                    this.setImages(el.Images)
-                    return el
-                }
-            })
+            console.log(MainModule.products)
+            return MainModule.products
+            // return MainModule.products.find((el: any) => {
+            //     if (el._id === Number(this.$route.params.id)) {
+            //         // this.setImages(el.Images)
+            //         return el
+            //     }
+            // })
         }
 
         slide: number = 0
@@ -121,7 +122,7 @@
         value: number = 1
 
         created() {
-            MainModule.fetchProducts()
+            // MainModule.fetchProducts()
         }
 
         private setImages(images: any) {

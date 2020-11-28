@@ -98,7 +98,8 @@ router.post('/', function (req, res, next) {
             Name: req.body.Name,
             Price: req.body.Price,
             Description: req.body.Description,
-            ProductImage: imagesPath
+            Home: req.body.Home,
+            ProductImage: imagesPath,
         });
         console.log(product);
         product
@@ -175,7 +176,7 @@ router.post('/', function (req, res, next) {
 // });
 
 //Update product
-router.patch('/:productId', async (req, res) => {
+router.put('/:productId', async (req, res) => {
     const id = req.params.productId
     const productModel = req.body
 

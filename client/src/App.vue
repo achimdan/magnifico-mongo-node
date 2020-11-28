@@ -1,14 +1,14 @@
 <template>
     <div id="app">
-        <Nav v-if="freeRoute"/>
+        <Nav v-if="freeRoute" />
 
         <div class="wrapper">
             <!-- <transition name="fade"> -->
-                <router-view></router-view>
-            <!-- </transition> -->            
+            <router-view></router-view>
+            <!-- </transition> -->
         </div>
 
-        <Footer v-if="freeRoute"/>
+        <Footer v-if="freeRoute" />
 
         <b-sidebar id="cart-sidebar"
                    title="Cart"
@@ -74,7 +74,7 @@
     color: #2c3e50;
     // height: 100%;
     .wrapper {
-        height: 100vh;
+        // height: 100%;
     }
 }
 

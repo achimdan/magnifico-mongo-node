@@ -61,6 +61,17 @@
     }
 }
 
+.news-letter-input {
+    input {
+        height: 50px;
+        border-radius: 0;
+        border: none;
+        &:focus {
+            box-shadow: none;
+        }
+    }
+}
+
 @media screen and (max-width: 480px) {
     .api-form-group /deep/ {
         margin: 0 0 20px;

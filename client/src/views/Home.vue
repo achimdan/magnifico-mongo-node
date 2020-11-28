@@ -1,54 +1,69 @@
 <template>
     <div>
         <section class="banner">
-            <div class="logo">
-                Magnifico
-            </div>
-        </section>
-        <section class="home-container">
-            <div class="main-container main-product">
-                <div class="product">
-                    <div class="item">
-                        <!-- <div class="description">
-                            <p>{{item.Name}}</p>
-                            <p>from: {{item.Price}}</p>
-                        </div> -->
-
-                        <!-- <img v-if="products.find(el => el.Id === 18)"
-                             :src="baseUrl + `api/files/${products.find(el => el.Id === 23).Images.find(el => el.Primary).Name}`"
-                             alt=""> -->
-                    </div>
-                    <div class="info">
-                        <h3>Lorem ipsum dolor</h3>
-                        <span class="text">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Odit vel vero perferendis nostrum amet ipsam corrupti repellendus consequatur repudiandae voluptatem labore sed pariatur fugit, cum nisi ex blanditiis delectus nihil?
-                        </span>
-                        <button type="button"
-                                class="primary-button primary-button-sm">
-                            Learn more
-                        </button>
-                    </div>
+            <div class="banner-container">
+                <div class="view-catalog">
+                    <span class="text">
+                        View our hand made products from the catalog !
+                    </span>
+                    <router-link class="primary-button view"
+                                 to="/products">
+                        VIEW CATALOG
+                    </router-link>
                 </div>
-                <!-- {{products.find(el => el.Id === 23)}} -->
-                <!-- <img v-if="products.find(el => el.Id === 23).Images[2].Name"
-                     :src="baseUrl + `api/files/${products.find(el => el.Id === 23).Images[2].Name}`"
-                     alt=""
-                     class="back-img"> -->
             </div>
         </section>
+
+        <MainComp />
+
         <section class="main-container">
-            <h2>Lorem ipsum dolor sit amet.</h2>
+            <h1 class="new">New Arrivals</h1>
+            <div class="home-products">
+                <!-- <ListProduct v-for="product in products" -->
+                <ListProduct v-for="product in products.filter(el => el.Home)"
+                             :key="product._id"
+                             :product="product"
+                             :fb="true" />
+            </div>
+        </section>
+
+        <NewsLetter />
+
+        <section class="main-container carousel">
+            <h2>WHAT THEY'RE SAYING</h2>
             <VueSlickCarousel :arrows="true"
                               :dots="false">
-                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam eos voluptate voluptates veritatis velit temporibus obcaecati, soluta rem. Quo aliquam atque cum eius ad quia ipsa magni perspiciatis numquam aperiam!</div>
-                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam eos voluptate voluptates veritatis velit temporibus obcaecati, soluta rem. Quo aliquam atque cum eius ad quia ipsa magni perspiciatis numquam aperiam!</div>
-                <div>Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam eos voluptate voluptates veritatis velit temporibus obcaecati, soluta rem. Quo aliquam atque cum eius ad quia ipsa magni perspiciatis numquam aperiam!</div>
+                <div class="opinions">
+                    <div class="comments">
+                        Dolor sit amet ipsum varius, ut tempor augue pretium. Fusce est magna, eleifend et enim sit amet, tempor scelerisque condimentum massa id massa. Etiam vel iaculis mi, at aliquet urna. Dolorsitesteste amet ipsum varius, ut tempor augue pretium. Fusce est magna, eleifend et enim sit amet, tempor scelerisque condimentum massa id massa. Etiam vel iaculis mi, at aliquet.
+                    </div>
+                    <div class="avatar">
+                        <b-avatar src="https://placekitten.com/300/300"
+                                  size="3em"></b-avatar>
+                        <span class="text">VICTORIA SYDNEY</span>
+                    </div>
+                </div>
+                <div class="opinions">
+                    <div class="comments">
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Rem corrupti earum assumenda? Fuga cum eius quam perspiciatis reiciendis ut, in possimus eos iste blanditiis amet molestiae iure dolore natus consectetur voluptate magnam praesentium id nemo. Asperiores non odit sit dolores?
+                    </div>
+                    <div class="avatar">
+                        <b-avatar src="https://placekitten.com/300/300"
+                                  size="3em"></b-avatar>
+                        <span class="text">VICTORIA SYDNEY</span>
+                    </div>
+                </div>
+                <div class="opinions">
+                    <div class="comments">
+                        Dolor sit amet ipsum varius, ut tempor augue pretium. Fusce est magna, eleifend et enim sit amet, tempor scelerisque condimentum massa id massa. Etiam vel iaculis mi, at aliquet urna. Dolorsitesteste amet ipsum varius, ut tempor augue pretium. Fusce est magna, eleifend et enim sit amet, tempor scelerisque condimentum massa id massa. Etiam vel iaculis mi, at aliquet.
+                    </div>
+                    <div class="avatar">
+                        <b-avatar src="https://placekitten.com/300/300"
+                                  size="3em"></b-avatar>
+                        <span class="text">VICTORIA SYDNEY</span>
+                    </div>
+                </div>
             </VueSlickCarousel>
-        </section>
-        <section class="home-products main-container">
-            <ListProduct v-for="product in products.filter(el => el.Home).slice(0, 4)"
-                         :key="product.Id"
-                         :product="product" />
         </section>
     </div>
 </template>
@@ -56,10 +71,12 @@
 <script lang="ts">
     import { Component, Vue, Prop } from "vue-property-decorator";
     import { MainModule } from '../store/main-module';
-    import ListProduct from '../components/list-product.vue';
+    import MainComp from './Admin/components/main-com.vue';
+    import ListProduct from '@/components/list-product.vue';
+    import NewsLetter from '@/components/news-letter.vue';
 
     @Component({
-        components: { ListProduct }
+        components: { MainComp, ListProduct, NewsLetter }
     })
     export default class HomeComponent extends Vue {
 
@@ -72,7 +89,7 @@
         }
 
         created() {
-            MainModule.fetchProducts()
+            // MainModule.fetchProducts()
         }
 
     }
@@ -85,62 +102,98 @@
     padding: 180px;
     background: url("../../src/assets/bg.png") center 40% no-repeat;
     background-size: cover;
-    .logo {
-        text-align: center;
-        font-size: 30px;
-        text-transform: uppercase;
-    }
-}
-.home-container {
-    background: #f5f5f5;
-    .main-product {
-        position: relative;
-        padding-top: 100px;
-        .product {
-            display: grid;
-            grid-template-columns: 500px auto;
-            height: 500px;
-            .item {
-                z-index: 9;
-                padding: 20px;
-                background: white;
-                position: relative;
-                top: -70px;
-                img {
-                    width: 100%;
-                }
+    .banner-container {
+        margin: 50px auto;
+        .view-catalog {
+            font-size: 30px;
+            text-transform: uppercase;
+            width: 490px;
+            font-weight: 700;
+            .text {
+                font-family: "Poppins", sans-serif;
             }
-            .info {
-                z-index: 9;
-                margin: 50px 50px 50px 200px;
-                background: white;
-                padding: 40px;
-                text-align: left;
-                height: 300px;
-                h3 {
-                    font-family: "Poppins", sans-serif;
-                    font-weight: 900;
-                }
-                .text {
-                    margin: 10px 0 20px;
-                    display: block;
+            .view {
+                text-align: center;
+                width: 250px;
+                font-size: 23px;
+                line-height: 58px;
+                margin-top: 20px;
+                &:hover {
+                    text-decoration: none;
+                    background: #161616;
                 }
             }
         }
-        .back-img {
-            position: absolute;
-            top: -60px;
-            left: 0;
-            right: 0;
-            margin: auto;
-            width: 500px;
-        }
     }
 }
+
+.new {
+    font-family: "Poppins", sans-serif;
+    font-weight: 800;
+}
+
 .home-products {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 30px;
-    margin-top: 100px;
+    margin: 60px auto 150px !important;
+}
+
+.carousel {
+    margin: 150px auto;
+    h2 {
+        font-family: "Poppins", sans-serif;
+        font-weight: 700;
+    }
+    .opinions {
+        width: 70% !important;
+        outline: none;
+        .comments {
+            margin-top: 30px;
+        }
+        .avatar {
+            margin-top: 20px;
+            .text {
+                font-size: 13px;
+                font-weight: 600;
+                margin-left: 10px;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .banner {
+        height: auto;
+        padding: 0px;
+        background: none;
+        position: absolute;
+        z-index: 99;
+        .banner-container {
+            width: 100%;
+            .view-catalog {
+                font-size: 30px;
+                text-transform: uppercase;
+                width: 100%;
+                .text {
+                    font-family: "Poppins", sans-serif;
+                }
+                .view {
+                    text-align: center;
+                    width: 250px;
+                    font-size: 23px;
+                    line-height: 58px;
+                    margin-top: 20px;
+                    &:hover {
+                        text-decoration: none;
+                        background: #161616;
+                    }
+                }
+            }
+        }
+    }
+    .home-products {
+        grid-template-columns: repeat(1, 1fr);
+    }
 }
 </style>

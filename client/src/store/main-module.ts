@@ -101,13 +101,13 @@ class Main extends VuexModule {
         const { _id } = payload
         delete payload._id
         await axios
-            .patch(`${this.BASE_URL_MONGO}products/${_id}`, payload)
+            .put(`${this.BASE_URL_MONGO}products/${_id}`, payload)
             .then((response: any) => {
                 const index = this.products.findIndex((el: any) => el._id === response.data.Id)
                 this.products[index] = response.data
                 console.log(this.products)
                 // this.products.push(response.data)
-                // this.uploadImages(response.data.Id, payload.images)
+                this.uploadImages(response.data.Id, payload.images)
             })
     }
 
@@ -164,6 +164,11 @@ class Main extends VuexModule {
         await axios
             .delete(`${this.BASE_URL_MONGO}products/${payload.item._id}`)
             .then(() => this.products.splice(payload.index, 1))
+    }
+
+    @Action
+    async subscribeToNewsletter(payload: any) {
+        console.log(payload)
     }
 
     // @Action

@@ -1,8 +1,8 @@
 <template>
     <div class="dashboard">
         <h2>Dasboard</h2>
-        
-        <div class="products">           
+
+        <div class="products">
 
             <b-table :table-class="'shop-table'"
                      striped
@@ -81,7 +81,7 @@
         ]
 
         created() {
-            MainModule.fetchProducts()
+            // MainModule.fetchProducts()
         }
 
         addProduct() {

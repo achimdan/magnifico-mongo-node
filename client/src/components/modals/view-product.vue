@@ -5,20 +5,18 @@
              dialog-class="view-product-modal"
              content-class="content-modal"
              body-class="body-modal"
-             @show="show"
              @hide="resetInfoModal"
              hide-header
              hide-footer>
 
         <div class="view-product">
-            <div class="slider"
-                 v-if="images.length > 0">
+            <div class="slider">
                 <VueSlickCarousel :arrows="true"
                                   :dots="false">
                     <div class="slider-container"
-                         v-for="image in images"
-                         :key="image.Id">
-                        <img :src="baseUrl + `api/files/${image.Name}`"
+                         v-for="(image, index) in selectedProduct.ProductImage"
+                         :key="index">
+                        <img :src="`http://localhost:3000/uploads/${image}`"
                              alt=""
                              class="landscape">
                     </div>
@@ -108,29 +106,20 @@
 
 <script lang="ts">
     import { Vue, Component, Prop, Watch } from "vue-property-decorator";
-    import { MainModule } from "@/store/main-module";
+    import { MainModule } from "../../store/main-module";
     import Input from '@/components/Input.vue'
-    import { CartModule } from '@/store/cart-module';
+    import { CartModule } from '../../store/cart-module';
 
     @Component
     export default class viewModalComponent extends Vue {
-
-        get baseUrl() {
-            return MainModule.BASE_URL
-        }
 
         get selectedProduct() {
             return MainModule.selectedProduct
         }
 
-        images: Array<{}> = []
         slide: number = 0
         sliding = null
         value: number = 1
-
-        show() {
-            this.images = this.selectedProduct.Images
-        }
 
         addToCart() {
             CartModule.addToCart(this.selectedProduct)

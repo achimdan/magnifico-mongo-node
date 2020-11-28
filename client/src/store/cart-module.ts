@@ -24,7 +24,7 @@ class Cart extends VuexModule {
     }
 
     @Action
-    async removeFromCart(index: number) {
+    async removeProductFromCart(index: number) {
         this.cartProducts.splice(index, 1)
     }
 

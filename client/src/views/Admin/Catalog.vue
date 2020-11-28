@@ -48,7 +48,7 @@
                                     style="text-shadow: 1px 1px 2px #333">
                             <b-carousel-slide v-for="image in product.ProductImage"
                                               :key="image.Id"
-                                              :img-src="`http://localhost:3000/uploads//${image}`">
+                                              :img-src="`http://localhost:3000/uploads/${image}`">
                             </b-carousel-slide>
                         </b-carousel>
                     </div>
@@ -69,8 +69,8 @@
                             </span>
                             <dropdown class="my-dropdown-toggle"
                                       :options="arrayOfObjects"
-                                      :selected="object"
-                                      v-on:updateOption="methodToRunOnSelect">
+                                      :selected="product.Home ? { name: 'Enable' } : { name: 'Disable' }"
+                                      v-on:updateOption="setHome(product._id, $event)">
                             </dropdown>
                         </div>
                         <div class="col1">
@@ -79,8 +79,8 @@
                             </span>
                             <dropdown class="my-dropdown-toggle"
                                       :options="arrayOfObjects"
-                                      :selected="object"
-                                      v-on:updateOption="methodToRunOnSelect">
+                                      :selected="product.Stock ? { name: 'Enable' } : { name: 'Disable' }"
+                                      v-on:updateOption="setStock(product._id, $event)">
                             </dropdown>
                         </div>
                         <div class="col2">
@@ -137,13 +137,6 @@
             return MainModule.BASE_URL_MONGO
         }
 
-        get object() {
-            return { name: 'Enable' }
-        }
-        set object(ev) {
-
-        }
-
         @Watch('searchProduct')
         searchProductInput(ev) {
             console.log(ev)
@@ -173,8 +166,13 @@
             MainModule.setSelectedProduct(MainModule.products.find((el: any) => el._id === productId ? el : null))
         }
 
-        private methodToRunOnSelect(payload) {
-            this.object = payload;
+        private setHome(id, ev) {
+            console.log(id, ev)
+            MainModule.editProduct({ _id: id, Home: ev.name === 'Enable' })
+        }
+
+        private setStock(payload) {
+            console.log(payload)
         }
 
         private edit(item: any) {

@@ -15,11 +15,11 @@
                 </button>
             </transition>
             <router-link class="image-container"
-                         :to="`/product/${product.Id}`">
-                <img :src="baseUrl + `api/files/${product.Images[0].Name}`"
-                     v-if="product.Images[0]"
+                         :to="`/product/${product._id}`">
+                <img :src="`http://localhost:3000/uploads/${product.ProductImage[0]}`"
                      alt=""
                      class="image">
+
             </router-link>
             <transition name="slide-up">
                 <div class="options"
@@ -57,17 +57,13 @@
 
 <script lang="ts">
     import { Component, Vue, Prop } from "vue-property-decorator";
-    import { MainModule } from '@/store/main-module';
+    import { MainModule } from '../store/main-module';
     import { CartModule } from '../store/cart-module';
 
     @Component({
         components: {}
     })
     export default class ListProductComponent extends Vue {
-
-        get baseUrl() {
-            return MainModule.BASE_URL
-        }
 
         @Prop() product: any
 

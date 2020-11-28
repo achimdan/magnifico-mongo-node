@@ -14,8 +14,10 @@ const productsRoute = require('./routes/api/products');
 //MIDDLEWARES Routes
 app.use(cors());
 app.use(express.json({ extended: false }));
+
 app.use('/api/categories', categoriesRoute);
 app.use('/api/products', productsRoute);
+
 app.use('/uploads', express.static('uploads'));
 
 //Handle production

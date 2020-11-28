@@ -17,10 +17,10 @@ const ProductsSchema = mongoose.Schema({
     //     type: Object,
     //     required: false
     // },
-    // Home: {
-    //     type: Boolean,
-    //     require: false
-    // },
+    Home: {
+        type: Boolean,
+        require: false
+    },
     // Colors: {
     //     type: Array,
     //     require: false

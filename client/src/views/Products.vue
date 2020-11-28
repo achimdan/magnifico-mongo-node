@@ -51,7 +51,7 @@
 
         created() {
             MainModule.fetchCategories()
-            MainModule.fetchProducts()
+            // MainModule.fetchProducts()
         }
 
     }
