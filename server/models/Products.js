@@ -1,22 +1,26 @@
 const mongoose = require('mongoose')
 
 const ProductsSchema = mongoose.Schema({
+    Active: {
+        type: Boolean,
+        require: false
+    },
     Name: {
         type: String,
-        require: true
+        require: false
     },
     Price: {
-        type: Number,
-        require: true
+        type: String,
+        require: false
     },
     Description: {
         type: String,
-        require: true
+        require: false
     },
-    // Category: {
-    //     type: Object,
-    //     required: false
-    // },
+    Category: {
+        type: Array,
+        required: false
+    },
     Home: {
         type: Boolean,
         require: false

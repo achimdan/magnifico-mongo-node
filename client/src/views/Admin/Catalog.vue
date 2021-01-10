@@ -1,14 +1,17 @@
 <template>
     <div class="products">
         <div class="admin-card admin-table">
-            <h3>Products (30)</h3>
+            <h3>Products ({{products.length}})</h3>
             <div class="header-card">
                 <!-- :id="product._id"
                              :name="product._id"
                              v-model="product.IsSelected" -->
                 <b-form-checkbox :value="true"
+                                 :unchecked-value="false"
                                  size="lg"
-                                 :unchecked-value="false">
+                                 @input="selectAll"
+                                 v-model="all">
+                    <span class="select-all">Select all</span>
                 </b-form-checkbox>
                 <div class="filter-products">
                     <b-form-group :id="`input-group_catalog`"
@@ -31,8 +34,9 @@
                     <div class="flex mt-3">
                         <b-form-checkbox :id="product._id"
                                          size="lg"
-                                         :name="product._id"
                                          v-model="product.IsSelected"
+                                         @input="selectOne"
+                                         :name="product._id"
                                          :value="true"
                                          :unchecked-value="false">
                         </b-form-checkbox>
@@ -148,6 +152,7 @@
             { name: 'Enable' },
             { name: 'Disable' },
         ]
+        all: any = ''
 
         created() {
             if (this.$route.query.productId) {
@@ -163,7 +168,7 @@
             const productId = this.$route.query.productId
             console.log(productId)
             MainModule.setModalType('EDIT')
-            MainModule.setSelectedProduct(MainModule.products.find((el: any) => el._id === productId ? el : null))
+            // MainModule.setSelectedProduct(MainModule.products.find((el: any) => el._id === productId ? el : null))
         }
 
         private setHome(id, ev) {
@@ -176,10 +181,10 @@
         }
 
         private edit(item: any) {
+            this.$router.replace({ query: { productId: `${item._id}`, modal: 'add-product-modal' } })
             MainModule.setModalType('EDIT')
-            MainModule.setSelectedProduct(item)
+            // MainModule.setSelectedProduct(item)
             this.$bvModal.show('add-product-modal')
-            this.$router.push({ path: 'catalog', query: { productId: `${item._id}`, modal: 'add-product-modal' } })
         }
 
 
@@ -189,6 +194,14 @@
 
         private preview(item: any) {
             this.$router.push(`/product/${item._id}`)
+        }
+
+        private selectAll() {
+            this.products.filter((el: any) => el.IsSelected = this.all)
+        }
+
+        private selectOne(ev) {
+            // console.log(ev)
         }
 
     }
@@ -206,6 +219,10 @@
         h2 {
             font-size: 24px;
             margin: 0;
+        }
+        .select-all {
+            font-size: 15px;
+            font-weight: bold;
         }
     }
     .filter-products {

@@ -93,25 +93,30 @@ router.post('/', function (req, res, next) {
         req.files.filter(el => {
             imagesPath.push(el.originalname)
         })
+        console.log(req.files);
         const product = new Product({
             _id: new mongoose.Types.ObjectId(),
+            Active: req.body.Active,
             Name: req.body.Name,
             Price: req.body.Price,
             Description: req.body.Description,
             Home: req.body.Home,
+            Category: req.body.Category,
             ProductImage: imagesPath,
         });
         console.log(product);
         product
             .save()
             .then(result => {
-                console.log(result);
+                
                 res.status(201).json({
                     message: "Created product successfully",
                     createdProduct: {
+                        Active: result.Active,
                         Name: result.Name,
                         Price: result.Price,
                         Description: result.Description,
+                        Category: result.Category,
                         _id: result._id,
                         request: {
                             type: 'GET',
@@ -130,61 +135,13 @@ router.post('/', function (req, res, next) {
     })
   })
 
-// router.post("/", upload.single('ProductImage'), (req, res, next) => {
-    // const product = new Product({
-    //     _id: new mongoose.Types.ObjectId(),
-    //     Name: req.body.Name,
-    //     Price: req.body.Price,
-    //     ProductImage: req.file.path 
-    // });
-//     product
-//         .save()
-//         .then(result => {
-//             console.log(result);
-//             res.status(201).json({
-//                 message: "Created product successfully",
-//                 createdProduct: {
-//                     Name: result.Name,
-//                     Price: result.Price,
-//                     _id: result._id,
-//                     request: {
-//                         type: 'GET',
-//                         url: "http://localhost:3000/products/" + result._id
-//                     }
-//                 }
-//             });
-//         })
-//         .catch(err => {
-//                 console.log(err);
-//                 res.status(500).json({
-//                 error: err
-//             });
-//         });
-//   });
-
-// router.post('/', upload.single('ProductImage'), async (req, res) => {
-//     console.log(req.file)
-//     const productModel = req.body
-//     const product = new Products(productModel);
-    
-//     try {
-//         const savedProducts = await product.save();
-//         res.json(savedProducts);
-//     } catch(err) {
-//         res.json(err);
-//     }
-// });
-
 //Update product
 router.put('/:productId', async (req, res) => {
     const id = req.params.productId
     const productModel = req.body
-
     try {
-        const updateProduct = await Products.findOneAndUpdate(
-            id,
-            productModel
-        );
+        const updateProduct = await Products.findByIdAndUpdate(id,productModel);
+        console.log(updateProduct)
         res.json(updateProduct);
     } catch(err) {
         res.json(err);

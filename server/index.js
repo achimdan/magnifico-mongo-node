@@ -33,6 +33,7 @@ if (process.env.NODE_ENV === 'production') {
 app.get('/', (req, res) => {
     res.send('HOME');
 })
+mongoose.set('useFindAndModify', false);
 
 //CONNECT TO DB
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true, useUnifiedTopology: true },() => console.log('connected to DB!'));

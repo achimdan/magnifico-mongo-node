@@ -4,7 +4,7 @@
         <b-dropdown id="dropdown"
                     block
                     :text="setItem.Name"
-                    class="mag-dropdown">
+                    :class="{'admin-dropdown' : admin}">
             <b-dropdown-item v-for="(item, index) in options"
                              @click="setItem = item"
                              :key="index">
@@ -20,9 +20,10 @@
     @Component
     export default class DropdownComponent extends Vue {
 
-        @Prop() options!: any
-        @Prop() name!: any
-        @Prop() label!: boolean
+        @Prop() admin: boolean
+        @Prop() options: any
+        @Prop() name: any
+        @Prop() label: boolean
 
         setItem: any = {}
 
@@ -47,9 +48,3 @@
 
     }
 </script>
-
-<style lang="scss" scoped>
-.api-dropdown {
-    margin: 0 !important;
-}
-</style>

@@ -16,6 +16,7 @@
             </transition>
             <router-link class="image-container"
                          :to="`/product/${product._id}`">
+                <!-- <b-skeleton-img></b-skeleton-img> -->
                 <img :src="`http://localhost:3000/uploads/${product.ProductImage[0]}`"
                      alt=""
                      class="image">

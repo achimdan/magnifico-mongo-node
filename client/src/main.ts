@@ -2,6 +2,8 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel.css'
 import 'vue-slick-carousel/dist/vue-slick-carousel-theme.css'
+import 'vue-multiselect/dist/vue-multiselect.min.css'
+import 'vue2-dropzone/dist/vue2Dropzone.min.css'
 
 import Vue from 'vue'
 import App from './App.vue'
@@ -33,7 +35,9 @@ import {
 	SpinnerPlugin,
 	ListGroupPlugin,
 	AvatarPlugin,
-	SkeletonPlugin
+	SkeletonPlugin,
+	TabsPlugin,
+	OverlayPlugin,
 } from 'bootstrap-vue'
 
 import VueSlickCarousel from 'vue-slick-carousel'
@@ -41,11 +45,12 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
 import { library } from '@fortawesome/fontawesome-svg-core'
+import Multiselect from 'vue-multiselect'
 
 library.add(fas, far)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
-
+Vue.component('Multiselect', Multiselect)
 Vue.component('VueSlickCarousel', VueSlickCarousel)
 
 Vue.use(IconsPlugin)
@@ -68,6 +73,8 @@ Vue.use(SpinnerPlugin)
 Vue.use(ListGroupPlugin)
 Vue.use(AvatarPlugin)
 Vue.use(SkeletonPlugin)
+Vue.use(TabsPlugin)
+Vue.use(OverlayPlugin)
 
 Vue.config.productionTip = false
 

@@ -135,6 +135,19 @@ html {
 }
 
 // MODALS
+.gen-modal {
+    .header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 30px;
+    }
+
+    .modal-content {
+        border-radius: 10px;
+        border: none;
+    }
+}
+
 #view-product-modal {
 
     // padding-left: 0 !important;
@@ -244,6 +257,13 @@ html {
     }
 }
 
+//admin-label
+.admin-label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #717171;
+}
+
 //to change
 .table th,
 .table td {
@@ -280,18 +300,32 @@ html {
     }
 }
 
-.b-dropdown {
+.admin-dropdown {
     .dropdown-toggle {
-        background-image: none;
+        background: none #eeeeee;
+        height: 35px;
+        padding: 0 10px;
+        border-radius: 10px;
+        text-align: left;
 
         &:hover,
         &:active,
         &:focus {
-            background: none;
-            color: #007CFF;
+            background: none #eeeeee;
+            color: black;
         }
     }
 
+}
+
+.admin-multiselect {
+    .multiselect__tags {
+        border: none;
+        background: #eeeeee;
+        border-radius: 10px;
+        min-height: 35px;
+        padding: 7px 40px 0 8px;
+    }
 }
 
 .my-dropdown-toggle {
@@ -320,6 +354,13 @@ html {
     .dropdown-menu {
         display: block;
     }
+}
+
+// DROPZONE
+
+.gen-dropzone {
+
+    .add-photo {}
 }
 
 @media only screen and (max-width: 600px) {

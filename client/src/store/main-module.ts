@@ -19,7 +19,6 @@ class Main extends VuexModule {
     categories: any = []
     products: Array<Object> = []
 
-    docId: any = ''
     modalType: string = ''
     selectedProduct: any = {}
     favorites: any = []
@@ -41,9 +40,17 @@ class Main extends VuexModule {
 
     @Mutation
     setSelectedProduct(payload: any) {
-        this.docId = payload.Id
         this.selectedProduct = payload
     }
+    
+    // @Mutation
+    // setSelectedProductImages(payload: any) {
+    //     let images = payload.map((el: any) => {
+    //         return el.name
+    //     })
+    //     console.log(images)
+    //     this.selectedProduct.ProductImage.push(payload)
+    // }
 
     @Mutation
     setRouteType(payload: any) {
@@ -75,39 +82,68 @@ class Main extends VuexModule {
         response.data ? this.products = data : null
     }
 
+    //Fetch product
+    @Action
+    async fetchProduct(productId: any) {
+        const response = await axios.get(`${this.BASE_URL_MONGO}products/${productId}`)
+        const data = response.data
+        this.selectedProduct = data
+        return data
+    }
+
     // Save products
     @Action
     async saveProduct(payload: any) {
+
+        const formData = this.mutateToFormData(payload)
+
+        await axios
+            .post(`${this.BASE_URL_MONGO}products`, formData)
+            .then(res => {
+                this.fetchProducts()
+            })
+            .catch(err => console.log(err))
+    }
+
+    private mutateToFormData(payload: any) {
         let formData = new FormData()
+        formData.append('Active', payload.Active);
         formData.append('Name', payload.Name);
         formData.append('Price', payload.Price);
         formData.append('Description', payload.Description);
 
         payload.ProductImage
-            .forEach((file: any, index: any) => {
-                formData.append('ProductImage[]', file)
-                console.log('ProductImage[' + index + ']', file)
+            .map((file: any, index: any) => {
+                formData.append('ProductImage', file)
             })
-        // formData.append('ProductImage', payload.ProductImage);
-        await axios
-            .post(`${this.BASE_URL_MONGO}products`, formData)
-            .then(res => console.log(res))
-            .catch(err => console.log(err))
+
+        return formData
     }
 
     @Action
     async editProduct(payload: any) {
+
+        // const formData = this.mutateToFormData(payload)
+
         console.log(payload)
+
+        // let formData = new FormData()
+        // formData.append('Name', payload.Name);
+        // formData.append('Price', payload.Price);
+        // formData.append('Description', payload.Description);
+
         const { _id } = payload
         delete payload._id
+        delete payload.ProductImage
         await axios
             .put(`${this.BASE_URL_MONGO}products/${_id}`, payload)
             .then((response: any) => {
-                const index = this.products.findIndex((el: any) => el._id === response.data.Id)
-                this.products[index] = response.data
-                console.log(this.products)
+                this.fetchProducts()
+                // const index = this.products.findIndex((el: any) => el._id === response.data.Id)
+                // this.products[index] = response.data
+                // console.log(this.products)
                 // this.products.push(response.data)
-                this.uploadImages(response.data.Id, payload.images)
+                // this.uploadImages(response.data.Id, payload.images)
             })
     }
 

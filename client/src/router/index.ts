@@ -84,12 +84,12 @@ router.beforeEach((to, from, next) => {
 	}
 	if (openRoutes.includes(to.name)) {
 		MainModule.setRouteType(true)
-		console.log('free')
+		// console.log('free')
 		next()
 	}
 	else if (lockedRouts.includes(to.name)) {
 		MainModule.setRouteType(false)
-		console.log('locked')
+		// console.log('locked')
 		next()
 	}
 	next()

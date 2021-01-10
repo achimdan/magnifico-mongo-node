@@ -4,13 +4,20 @@
             <div class="setup">
                 <b-button v-b-modal.add-category-modal
                           class="main-button">
-                    <span>+</span>
-                    Add new category
+                    <!-- <span>+</span> -->
+                    <font-awesome-icon :icon="['fas', 'eye']"
+                                       class="icon alt" />
+                    <span>
+                        Add new category
+                    </span>
                 </b-button>
                 <b-button @click="addProduct"
                           class="main-button">
-                    <span>+</span>
-                    Add new product
+                    <font-awesome-icon :icon="['fas', 'eye']"
+                                       class="icon alt" />
+                    <span>
+                        Add new product
+                    </span>
                 </b-button>
             </div>
             <router-link class="link"
@@ -82,14 +89,16 @@
 
 <style lang="scss" scoped>
 .menu {
-    background: #F9F9F9;
+    background: #f9f9f9;
+    height: 100vh;
     .links {
         margin-top: 70px;
         .setup {
             display: flex;
             flex-flow: column;
-            padding: 0 30px;
-            margin-bottom: 20px;
+            // padding: 0 30px;
+            margin: 20px;
+            justify-content: space-between;
             .main-button {
                 margin-bottom: 10px;
                 color: white;
@@ -102,7 +111,7 @@
                 text-transform: capitalize;
                 font-size: 13px;
                 span {
-                    font-size: 20px;
+                    font-size: 13px;
                 }
             }
         }

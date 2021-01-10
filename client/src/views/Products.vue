@@ -7,7 +7,7 @@
                       v-model="category" />
         </div>
         <div class="products">
-            <ListProduct v-for="product in products"
+            <ListProduct v-for="product in products.filter(el => el.Active)"
                          :key="product.Id"
                          :product="product" />
         </div>
@@ -50,7 +50,7 @@
         category: any = {}
 
         created() {
-            MainModule.fetchCategories()
+            // MainModule.fetchCategories()
             // MainModule.fetchProducts()
         }
 
